@@ -1,5 +1,6 @@
 package com.ps.swiggyclonenew.ui.screens
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
@@ -22,6 +24,11 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,9 +41,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ps.swiggyclonenew.R
+import com.ps.swiggyclonenew.isFirstTimeUser
+import com.ps.swiggyclonenew.setNotFirstTimeUser
 import com.ps.swiggyclonenew.ui.SwiggyTopBar
+import com.ps.swiggyclonenew.ui.lottieanim.LocationAnim
+import com.ps.swiggyclonenew.ui.lottieanim.YummyAnim
 import com.ps.swiggyclonenew.ui.reusables.CardItem
 import com.ps.swiggyclonenew.ui.reusables.SearchBar
+import com.ps.swiggyclonenew.ui.reusables.WelcomeOffersBottomSheet
 
 
 @Composable
@@ -44,6 +56,7 @@ fun SwiggyMainScreen(
     navController:NavController
 )
 {
+
     Column(
         modifier = Modifier.fillMaxSize()
             .background(Color(0xFFF8F2F1)),
@@ -79,7 +92,17 @@ fun SwiggyMainScreen(
 
             // Add some space before the cards
             item {
-                Spacer(modifier = Modifier.height(140.dp)) // Space before cards
+                Row(
+                    modifier = Modifier.fillMaxWidth(), // Ensures the Row takes the full width
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(140.dp)
+                    ) {
+                        YummyAnim(modifier = Modifier)
+                    }
+                }
             }
 
             // Cards Layout

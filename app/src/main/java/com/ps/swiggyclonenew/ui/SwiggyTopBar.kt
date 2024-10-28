@@ -2,6 +2,7 @@ package com.ps.swiggyclonenew.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -49,6 +50,9 @@ fun SwiggyTopBar(navController: NavController) {
                 // Left part with location and address
                 Column(
                     modifier = Modifier.weight(1f) // Column takes up the space of Row except Profile
+                        .clickable {
+                            navController.navigate("setlocation")
+                        }
                 ) {
                     // First row with icon and label
                     Row(

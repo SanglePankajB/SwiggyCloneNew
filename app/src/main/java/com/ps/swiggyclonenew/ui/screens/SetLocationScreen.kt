@@ -38,8 +38,9 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LocationScreen() {
-//fun LocationScreen(navController: NavController) {
+fun LocationScreen(
+    navController: NavController
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,7 +54,7 @@ fun LocationScreen() {
         ) {
             IconButton(
                 onClick = {
-//                    navController.popBackStack()
+                    navController.popBackStack()
                 } // Go back to the previous screen
             ) {
                 Icon(
@@ -160,5 +161,6 @@ fun LocationScreen() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLocationScreen() {
-    LocationScreen()
+
+//    LocationScreen()
 }

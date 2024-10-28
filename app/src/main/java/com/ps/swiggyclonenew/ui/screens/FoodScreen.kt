@@ -48,7 +48,8 @@ import com.ps.swiggyclonenew.ui.reusables.RestaurantBrandCard
 import com.ps.swiggyclonenew.ui.reusables.SearchBar
 import com.ps.swiggyclonenew.viewmodels.MainViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
-
+import com.ps.swiggyclonenew.ui.lottieanim.LocationAnim
+import com.ps.swiggyclonenew.ui.lottieanim.YummyAnim
 
 
 @Composable
@@ -91,10 +92,30 @@ fun FoodScreen(
                     }
                 )
             }
+            item {
+                Spacer(modifier = Modifier.height(20.dp))
+            }
 
             // Add some space before the cards
             item {
-                Spacer(modifier = Modifier.height(140.dp)) // Space before cards
+                Row(
+                    modifier = Modifier.fillMaxWidth(), // Ensures the Row takes the full width
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .height(120.dp)
+                            .weight(1f)
+                    ) {
+                        LocationAnim(modifier = Modifier)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .width(140.dp)
+                            .height(140.dp)
+                    ) {
+                        YummyAnim(modifier = Modifier)
+                    }
+                }
             }
 
             // Cards Layout

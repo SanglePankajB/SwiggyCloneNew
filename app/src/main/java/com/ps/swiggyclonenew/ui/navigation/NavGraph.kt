@@ -8,6 +8,7 @@ import com.ps.swiggyclonenew.ui.screens.DineoutScreen
 import com.ps.swiggyclonenew.ui.screens.FoodScreen
 import com.ps.swiggyclonenew.ui.screens.GenieScreen
 import com.ps.swiggyclonenew.ui.screens.InstamartScreen
+import com.ps.swiggyclonenew.ui.screens.LocationScreen
 import com.ps.swiggyclonenew.ui.screens.LoginScreen
 import com.ps.swiggyclonenew.ui.screens.ProfileScreen
 import com.ps.swiggyclonenew.ui.screens.ReorderScreen
@@ -22,6 +23,7 @@ sealed class Screen(val route: String) {
     object Genie : Screen("genie")
     object Login : Screen("login")
     object Profile : Screen("profile")
+    object SetLocation : Screen("setlocation")
 }
 
 @Composable
@@ -53,6 +55,9 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable(route = Screen.Profile.route) {
             ProfileScreen(navController)
+        }
+        composable(route = Screen.SetLocation.route) {
+            LocationScreen(navController)
         }
     }
 }

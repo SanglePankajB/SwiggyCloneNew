@@ -94,6 +94,7 @@ dependencies {
 //    implementation("com.google.accompanist:accompanist-glide:0.15.0") // Update with the latest version
     implementation("com.github.bumptech.glide:glide:4.16.0") // Replace with the latest version
 
+    implementation  ("com.airbnb.android:lottie-compose:6.3.0")
 
 }
 
