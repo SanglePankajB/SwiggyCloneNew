@@ -1,8 +1,7 @@
 package com.ps.swiggyclonenew.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.ps.swiggyclonenew.models.Category
+import com.ps.swiggyclonenew.models.Restaurents
 import com.ps.swiggyclonenew.retrofit.MealAPI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +16,6 @@ class MealRepo @Inject constructor(private val mealAPI: MealAPI) {
         // Call the API to get the meals category
         val result = mealAPI.getMealsCategory()
 
-        // Check if the response is successful and contains a body
         val mealList = if (result.isSuccessful && result.body() != null) {
             // Extract categories from the response body
             result.body()!!.categories
@@ -28,6 +26,18 @@ class MealRepo @Inject constructor(private val mealAPI: MealAPI) {
         // Update StateFlow with fetched data
         _meals.value = mealList
         return mealList
+    }
+    suspend fun getRestaurent(): List<Restaurents> {
+        // Call the API to get the meals category
+        val result = mealAPI.getRestaurants()
+
+        val restaurentList = if (result.isSuccessful && result.body() != null) {
+            // Extract categories from the response body
+            result.body()!!.restaurent
+        } else {
+            emptyList() // Return an empty list in case of failure
+        }
+        return restaurentList
     }
 }
 

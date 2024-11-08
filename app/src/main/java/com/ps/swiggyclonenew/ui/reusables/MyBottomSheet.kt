@@ -24,7 +24,6 @@ fun WelcomeOffersBottomSheet(
             .padding(16.dp),
         verticalArrangement = Arrangement.Top
     ) {
-        // Header Image
         Image(
             painter = painterResource(id = R.drawable.img_welcome),
             contentDescription = "Welcome Image",
@@ -35,7 +34,6 @@ fun WelcomeOffersBottomSheet(
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Welcome Text
         Text(
             text = "Welcome to Our App!",
             fontSize = 20.sp,

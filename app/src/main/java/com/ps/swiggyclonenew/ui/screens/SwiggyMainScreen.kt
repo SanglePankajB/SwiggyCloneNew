@@ -1,13 +1,11 @@
 package com.ps.swiggyclonenew.ui.screens
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,73 +16,59 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ps.swiggyclonenew.R
-import com.ps.swiggyclonenew.isFirstTimeUser
-import com.ps.swiggyclonenew.setNotFirstTimeUser
-import com.ps.swiggyclonenew.ui.SwiggyTopBar
-import com.ps.swiggyclonenew.ui.lottieanim.LocationAnim
+import com.ps.swiggyclonenew.intent.MyIntent
+import com.ps.swiggyclonenew.ui.SwiggyTopBar2
 import com.ps.swiggyclonenew.ui.lottieanim.YummyAnim
 import com.ps.swiggyclonenew.ui.reusables.CardItem
 import com.ps.swiggyclonenew.ui.reusables.SearchBar
-import com.ps.swiggyclonenew.ui.reusables.WelcomeOffersBottomSheet
-
 
 @Composable
 fun SwiggyMainScreen(
-    navController:NavController
+    navController:NavController,
+    userIntent:(MyIntent)->Unit
 )
 {
-
     Column(
         modifier = Modifier.fillMaxSize()
-            .background(Color(0xFFF8F2F1)),
+            .background(Color(0xFFF5F5F5)),
         verticalArrangement = Arrangement.Top
     ) {
-
         // Add a scrollable container
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
 //            contentPadding = PaddingValues(top = 8.dp) // Padding for top space
         ) {
             item {
-                // Your TopBar
-                SwiggyTopBar(navController = navController)
+                SwiggyTopBar2(navController = navController, 16.dp)
             }
-            // Add some space before the searchbar
             item {
                 Spacer(modifier = Modifier.height(8.dp)) // Space before cards
             }
 
             item {
-                // Search Bar
                 SearchBar(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
                     onSearch = { query ->
-                        // Handle search action here
+                        userIntent.invoke(
+                            MyIntent.Search(query)
+                        )
+                        navController.navigate("filterscreen")
                         println("Search query: $query")
                     }
                 )
@@ -93,7 +77,7 @@ fun SwiggyMainScreen(
             // Add some space before the cards
             item {
                 Row(
-                    modifier = Modifier.fillMaxWidth(), // Ensures the Row takes the full width
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Box(
                         modifier = Modifier
@@ -195,5 +179,5 @@ fun SwiggyMainScreen(
 @Composable
 fun PreviewSwiggyTopBar() {
     val fakeNavController = rememberNavController() // This will create a fake instance
-    SwiggyMainScreen(navController = fakeNavController)
+//    SwiggyMainScreen(navController = fakeNavController)
 }

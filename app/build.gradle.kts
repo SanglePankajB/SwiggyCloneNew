@@ -95,6 +95,10 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0") // Replace with the latest version
 
     implementation  ("com.airbnb.android:lottie-compose:6.3.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("com.google.accompanist:accompanist-coil:0.15.0") // Adjust version as needed
+
+
 
 }
 

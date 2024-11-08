@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.ps.swiggyclonenew.repository.MealRepo
 import javax.inject.Inject
 
-class MainViewmodelFactory @Inject constructor(private val repo: MealRepo) : ViewModelProvider.Factory{
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(repo) as T
-    }
-}
+//class MainViewmodelFactory @Inject constructor(private val repo: MealRepo) : ViewModelProvider.Factory{
+//
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        return MainViewModel(repo) as T
+//    }
+//}

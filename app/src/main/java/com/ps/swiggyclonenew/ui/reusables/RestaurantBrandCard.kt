@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -28,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.ps.swiggyclonenew.R
 
@@ -39,14 +42,14 @@ fun RestaurantBrandCard(
     subTitle: String? = null,
     location: String,
     deliveryType: String? = null,
-    imageResource: Int,
+    img: String,
     modifier: Modifier,
     onClick: () -> Unit,
 ) {
     Row(
         modifier = modifier
     ) {
-        FoodBrandCard("RS 100 OFF", "ABOVE RS 199", R.drawable.burger) {}
+        FoodBrandCard2("RS 100 OFF", "ABOVE RS 199", img) {}
 
         // Description Section below the image
         Column(
@@ -107,20 +110,67 @@ fun RestaurantBrandCard(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun PreviewRestaurantBrandCard() {
-//    val fakeNavController = rememberNavController() // This will create a fake instance
-    RestaurantBrandCard(
-        "Hydrabady's",
-        "4",
-        "30-40 min",
-        null,
-        "Streetfood, Chaat, Sweets, Wakad. 3.5km",
-        "FREE",
-        R.drawable.burger,
-        modifier = Modifier
-    ) {}
+fun RestaurantBrandCard2(
+    title: String,
+    rating: String,
+    timeToServe: String,
+    subTitle: String? = null,
+    location: String,
+    deliveryType: String? = null,
+    img: String,
+    modifier: Modifier,
+    onClick: () -> Unit,
+) {
+    Column(
+        modifier = modifier
+            .padding(start = 16.dp)
+    ) {
+        FoodBrandCard2("RS 100 OFF", "ABOVE RS 199", img) {}
+
+        // Description Section below the image
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(), // Padding for the text section
+            verticalArrangement = Arrangement.spacedBy(4.dp) // Space between each line
+        ) {
+            Text(
+                text = title,
+                color = Color.Black,
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                ), // Title style
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                // Rating Icon
+                Image(
+                    painter = painterResource(id = R.drawable.ic_rating),
+                    contentDescription = "Rating Star",
+                    modifier = Modifier.size(16.dp) // Set the size of the rating star
+                )
+                Spacer(modifier = Modifier.width(4.dp)) // Space between star and rating text
+                Text(
+                    text = "$rating · $timeToServe mins",
+                    color = Color.Gray,
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold), // Rating and time style
+                    maxLines = 1
+                )
+            }
+
+            subTitle?.let {
+                Text(
+                    text = subTitle,
+                    color = Color.Black.copy(alpha = 0.7f),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp), // Subtitle style
+                    maxLines = 1
+                )
+            }
+        }
+    }
 }
 
 
@@ -148,7 +198,7 @@ fun DisabledButton(
                 .background(
                     brush = Brush.horizontalGradient(
                         colors = listOf(
-                            gradientStartColor ?: Color(0xFFBEADE6), // Start color
+                            gradientStartColor ?: Color(0xFFABA3CC), // Start color
                             Color(0xFFFAF7F7)  // End color
                         )
                     )
@@ -157,12 +207,13 @@ fun DisabledButton(
         ) {
             Text(
                 text = text,
-                color = textColor ?: Color( 0xFF2A008B), // Dark blue text
+                color = textColor ?: Color(0xFF00238B), // Dark blue text
                 style = MaterialTheme.typography.bodySmall.copy(
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.ExtraBold,
                     fontSize = 8.sp // Small font size
                 ),
-                maxLines = 1
+                maxLines = 1,
+                letterSpacing = .06.em
             )
         }
     }

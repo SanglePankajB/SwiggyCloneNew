@@ -1,10 +1,16 @@
 package com.ps.swiggyclonenew.ui.reusables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
@@ -22,10 +28,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ps.swiggyclonenew.R
 
 
 @Composable
@@ -53,7 +62,6 @@ fun SearchBar(
                 value = textState,
                 onValueChange = { newText ->
                     textState = newText
-                    onSearch(newText) // Trigger search action on text change
                 },
                 placeholder = {
                     Text(
@@ -75,6 +83,14 @@ fun SearchBar(
                     .weight(1f) // TextField takes up available space
                     .padding(end = 8.dp) // Padding to avoid overlap with icons
                     .height(56.dp), // Set a fixed height
+                maxLines = 1,
+                singleLine = true,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Search // Show search icon on the keyboard
+                ),
+                keyboardActions = KeyboardActions(
+                    onSearch = { onSearch(textState) } // Trigger search when the user presses "Search" on the keyboard
+                ),
             )
 
             // Search Icon
@@ -85,13 +101,21 @@ fun SearchBar(
                     tint = Color.Black
                 )
             }
+            // Vertical divider
+            Spacer(
+                modifier = Modifier
+                    .width(1.dp) // Set the width of the vertical divider
+                    .height(24.dp) // Adjust height to match your layout
+                    .background(Color.LightGray) // Set the color of the divider
+            )
 
             // Mic Icon
             IconButton(onClick = { /* Handle mic click */ }) {
                 Icon(
-                    imageVector = Icons.Default.Call,
-                    contentDescription = "Voice Search",
-                    tint = Color.Black
+                    modifier = Modifier.size(20.dp),
+                    painter = painterResource(R.drawable.ic_mic_1),
+                    contentDescription = "Mic",
+                    tint = Color(0xFFFF5722)
                 )
             }
         }

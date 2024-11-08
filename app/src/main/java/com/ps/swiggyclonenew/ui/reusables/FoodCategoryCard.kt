@@ -29,7 +29,7 @@ fun GlideImageComposable(
             ImageView(context).apply {
                 Glide.with(context)
                     .load(imageUrl)
-                    .apply(RequestOptions().centerCrop())
+                    .apply(RequestOptions().fitCenter())
                     .into(this)
             }
         }
@@ -52,11 +52,16 @@ fun FoodCategoryCard(title: String, imageUrl: String, onClick: () -> Unit) {
             GlideImageComposable(
                 imageUrl = imageUrl,
                 modifier = Modifier
-                    .size(40.dp)
-                    .align(Alignment.End)
+                    .size(56.dp)
+                    .align(Alignment.CenterHorizontally)
                     .padding(bottom = 4.dp)
             )
-            Text(text = title)
+            Text(
+                text = title,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally),
+                maxLines = 1
+            )
         }
     }
 }

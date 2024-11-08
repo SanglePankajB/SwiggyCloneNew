@@ -2,16 +2,19 @@ package com.ps.swiggyclonenew.models
 
 import androidx.compose.ui.Modifier
 
-
-data class CategoryResponse(
-    val categories: List<Category>
+data class Restaurent(
+    val restaurent: List<Restaurents>
 )
 
-data class Category(
-    val idCategory: String,
-    val strCategory: String,
-    val strCategoryDescription: String,
-    val strCategoryThumb: String
+data class Restaurents(
+    val idRes: String,
+    val restDeleveryType: String,
+    val restLocation: String,
+    val restName: String,
+    val restRating: String,
+    val restSubTitle: String,
+    val restThubnail: String,
+    val restServeTime: String
 )
 
 data class RestaurantParam(

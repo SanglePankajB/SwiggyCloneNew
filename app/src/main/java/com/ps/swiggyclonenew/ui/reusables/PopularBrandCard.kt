@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.ps.swiggyclonenew.R
-import com.ps.swiggyclonenew.ui.screens.FoodScreen
 
 @Composable
 fun PopularBrandCard(title: String, subTitle: String, imageResource: Int, onClick: () -> Unit) {
