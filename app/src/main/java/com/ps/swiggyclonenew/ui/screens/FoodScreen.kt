@@ -21,9 +21,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalContext
@@ -192,16 +190,36 @@ fun FoodScreen(
                     modifier = Modifier
                         .fillMaxWidth(), // Padding for the cards
                 ) {
-                    Text(
-                        modifier = Modifier.padding(start = 16.dp),
-                        text = "PANKAJ, WHAT'S ON YOUR MIND?",
-                        color = Color.Black,
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 12.sp,
-                        maxLines = 1,
-                        letterSpacing = .12.em,
-                        fontWeight = FontWeight.Medium,
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically, // Center vertically in Row
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "PANKAJ, WHAT'S ON YOUR MIND",
+                            color = Color.Black,
+                            fontFamily = FontFamily.SansSerif,
+                            fontSize = 12.sp,
+                            maxLines = 1,
+                            letterSpacing = .12.em,
+                            fontWeight = FontWeight.Medium,
+                            modifier = Modifier.padding(start = 16.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(4.dp))
+
+                        // Fading line
+                        Box(
+                            modifier = Modifier
+                                .height(1.dp)
+                                .weight(1f) // Fill remaining space horizontally
+                                .background(
+                                    brush = Brush.horizontalGradient(
+                                        colors = listOf(Color.LightGray, Color.Transparent)
+                                    )
+                                )
+                        )
+                    }
                     LazyRow {
                         item {
                             Column {
@@ -242,16 +260,32 @@ fun FoodScreen(
                     modifier = Modifier
                         .padding(vertical = 16.dp), // Padding for the cards
                 ) {
-                    Text(
-                        "POPULAR BRANDS",
-                        color = Color.Black,
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 12.sp,
-                        maxLines = 1,
-                        letterSpacing = .12.em,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            "POPULAR BRANDS",
+                            color = Color.Black,
+                            fontFamily = FontFamily.SansSerif,
+                            fontSize = 12.sp,
+                            maxLines = 1,
+                            letterSpacing = .12.em,
+                            fontWeight = FontWeight.Medium,
+                            modifier = Modifier.padding(start = 16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        // Fading line
+                        Box(
+                            modifier = Modifier
+                                .height(1.dp)
+                                .weight(1f) // Fill remaining space horizontally
+                                .background(
+                                    brush = Brush.horizontalGradient(
+                                        colors = listOf(Color.LightGray, Color.Transparent)
+                                    )
+                                )
+                        )
+
+                    }
+
                     Spacer(modifier = Modifier.height(16.dp))
 
                     LazyRow {

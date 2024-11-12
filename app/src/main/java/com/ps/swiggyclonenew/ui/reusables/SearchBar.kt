@@ -1,5 +1,12 @@
 package com.ps.swiggyclonenew.ui.reusables
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +28,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,15 +43,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ps.swiggyclonenew.R
+import kotlinx.coroutines.delay
 
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    hintText: String = "Search...",
+    hintText: String = "Search for ",
     onSearch: (String) -> Unit
 ) {
     var textState by remember { mutableStateOf("") }
+    val hints = listOf("'Milk'", "'Biryani'", "'Paneer'", "'Pizza'")  // Your array of texts
+    var changingHintText by remember { mutableStateOf(hints[0]) }       // Initial text state
+
+    // LaunchedEffect to run a loop that updates text every 1 second
+    LaunchedEffect(Unit) {
+        var index = 0
+        while (true) {
+            changingHintText = hints[index % hints.size]   // Update hintText
+            index++                                // Move to the next hint
+            delay(2000L)                           // Wait for 1 second
+        }
+    }
 
     Surface(
         modifier = modifier,
@@ -64,10 +86,24 @@ fun SearchBar(
                     textState = newText
                 },
                 placeholder = {
-                    Text(
-                        text = hintText,
-                        color = Color.Gray
-                    )
+                    Row {
+                        Text(
+                            text = hintText,
+                            color = Color.Gray
+                        )// Use AnimatedContent to apply the slide animation on text change
+                        AnimatedContent(
+                            targetState = changingHintText,
+                            transitionSpec = {
+                                slideInVertically { height -> height } + fadeIn() with
+                                        slideOutVertically { height -> -height } + fadeOut()
+                            }
+                        ) { targetHint ->
+                            Text(
+                                text = targetHint,
+                                color = Color.Gray
+                            )
+                        }
+                    }
                 },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent,

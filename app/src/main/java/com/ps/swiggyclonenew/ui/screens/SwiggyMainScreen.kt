@@ -50,7 +50,6 @@ fun SwiggyMainScreen(
         // Add a scrollable container
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-//            contentPadding = PaddingValues(top = 8.dp) // Padding for top space
         ) {
             item {
                 SwiggyTopBar2(navController = navController, 16.dp)
